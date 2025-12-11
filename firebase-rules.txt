@@ -1,0 +1,25 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+        "results": {
+          "$resultId": {
+            ".validate": "newData.hasChildren(['score','totalQuestions','percentage','createdAt']) && newData.child('score').isNumber() && newData.child('totalQuestions').isNumber() && newData.child('percentage').isNumber() && newData.child('createdAt').isNumber()",
+            "answers": {
+              "$answerId": {
+                ".validate": "newData.hasChildren(['questionId','selected','correct'])"
+              }
+            },
+            "questions": {
+              "$qId": {
+                ".validate": "newData.hasChildren(['id','question','options','correctAnswer'])"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
