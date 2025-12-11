@@ -258,9 +258,9 @@ export default function Home() {
                   </p>
                   <div className="flex flex-col gap-4 items-center">
                     <Button size="lg" className="gap-2 rounded-full px-8 hover:scale-105 transition-transform" asChild>
-                      <a href="mailto:hello@optimum.ai">
+                      <a href="mailto:optimum-five@gmail.com">
                         <Mail className="w-4 h-4" />
-                        hello@optimum.ai
+                        optimum-five@gmail.com
                       </a>
                     </Button>
                     <div className="flex gap-4">
