@@ -61,7 +61,7 @@ export default function Home() {
               <ThemeToggle />
               <Button variant="ghost" size="icon" asChild className="hover:bg-secondary/50">
                 <a 
-                  href="https://github.com/replit/optimum" 
+                  href="https://github.com/nareshAiNexus/Optimum.git" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
