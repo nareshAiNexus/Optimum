@@ -265,10 +265,10 @@ export default function Home() {
                     </Button>
                     <div className="flex gap-4">
                       <Button variant="ghost" size="icon" asChild className="hover:bg-background">
-                        <a href="#" className="hover:text-primary transition-colors"><Github className="w-5 h-5" /></a>
+                        <a href="https://github.com/nareshAiNexus" className="hover:text-primary transition-colors"><Github className="w-5 h-5" /></a>
                       </Button>
                       <Button variant="ghost" size="icon" asChild className="hover:bg-background">
-                        <a href="#" className="hover:text-primary transition-colors"><span className="font-bold text-lg">𝕏</span></a>
+                        {/* <a href="#" className="hover:text-primary transition-colors"><span className="font-bold text-lg">𝕏</span></a> */}
                       </Button>
                     </div>
                   </div>
