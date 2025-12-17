@@ -5,6 +5,32 @@ export interface Question {
   correctAnswer: number;
 }
 
+/**
+ * Shuffles the options array and updates the correctAnswer index accordingly
+ */
+function shuffleOptions(question: Question): Question {
+  const { options, correctAnswer } = question;
+
+  // Create array of indices
+  const indices = options.map((_, i) => i);
+
+  // Fisher-Yates shuffle
+  for (let i = indices.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[j]] = [indices[j], indices[i]];
+  }
+
+  // Create shuffled options and find new correct answer index
+  const shuffledOptions = indices.map(i => options[i]);
+  const newCorrectAnswer = indices.indexOf(correctAnswer);
+
+  return {
+    ...question,
+    options: shuffledOptions,
+    correctAnswer: newCorrectAnswer
+  };
+}
+
 export async function generateQuestions(apiKey: string, text: string, count: number): Promise<Question[]> {
   const prompt = `
     You are an expert educator. 
@@ -19,6 +45,9 @@ export async function generateQuestions(apiKey: string, text: string, count: num
       "options": ["option1", "option2", "option3", "option4"],
       "correctAnswer": number (0-3 index of the correct option)
     }
+
+    IMPORTANT: Vary the position of correct answers. Don't always put the correct answer at index 0.
+    Mix up the correct answer positions across different questions for better quiz quality.
 
     Do not include any markdown formatting like \`\`\`json. Just the raw JSON array.
 
@@ -60,14 +89,24 @@ export async function generateQuestions(apiKey: string, text: string, count: num
 
     // Clean up markdown if present (sometimes the model ignores the instruction)
     const cleanedText = content.replace(/```json/g, "").replace(/```/g, "").trim();
-    
+
     // Attempt to parse JSON
     try {
-        const questions = JSON.parse(cleanedText);
-        return questions;
+      const questions = JSON.parse(cleanedText);
+
+      // Shuffle options for each question to randomize answer positions
+      const shuffledQuestions = questions.map((q: Question) => shuffleOptions(q));
+
+      console.log('Generated questions with shuffled options:', shuffledQuestions.map((q: Question) => ({
+        id: q.id,
+        correctAnswer: q.correctAnswer,
+        correctOption: q.options[q.correctAnswer]
+      })));
+
+      return shuffledQuestions;
     } catch (parseError) {
-        console.error("JSON Parse Error:", parseError, "Raw Content:", content);
-        throw new Error("Failed to parse AI response. The model might be overloaded. Please try again.");
+      console.error("JSON Parse Error:", parseError, "Raw Content:", content);
+      throw new Error("Failed to parse AI response. The model might be overloaded. Please try again.");
     }
 
   } catch (error: any) {
