@@ -31,32 +31,32 @@ export function QuizResults({ questions, userAnswers, score, onReset }: QuizResu
   const percentage = questions.length ? Math.round((score / questions.length) * 100) : 0;
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="w-full max-w-2xl mx-auto space-y-8"
+      className="w-full max-w-2xl mx-auto space-y-6 md:space-y-8"
     >
-      <div className="text-center space-y-4">
-        <div className="inline-flex items-center justify-center p-4 rounded-full bg-primary/10 mb-4">
-          <Trophy className="w-12 h-12 text-primary" />
+      <div className="text-center space-y-3 md:space-y-4">
+        <div className="inline-flex items-center justify-center p-3 md:p-4 rounded-full bg-primary/10 mb-3 md:mb-4">
+          <Trophy className="w-10 h-10 md:w-12 md:h-12 text-primary" />
         </div>
-        <h2 className="text-3xl font-display font-bold">Quiz Complete!</h2>
-        <p className="text-muted-foreground">Here's how you performed</p>
-        
-        <div className="flex items-center justify-center gap-2 text-4xl font-bold text-primary">
+        <h2 className="text-2xl sm:text-3xl font-display font-bold">Quiz Complete!</h2>
+        <p className="text-sm md:text-base text-muted-foreground">Here's how you performed</p>
+
+        <div className="flex items-center justify-center gap-2 text-3xl sm:text-4xl font-bold text-primary">
           <span>{percentage}%</span>
-          <span className="text-lg text-muted-foreground font-normal self-end mb-1">Score</span>
+          <span className="text-base sm:text-lg text-muted-foreground font-normal self-end mb-1">Score</span>
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 md:space-y-4">
         {questions.map((q, idx) => {
           const userAnswer = userAnswers.find(a => a.questionId === q.id);
           const isCorrect = userAnswer?.selected === q.correctAnswer;
 
           return (
             <div key={q.id} className={cn(
-              "p-4 rounded-lg border text-left transition-all",
+              "p-4 md:p-5 rounded-lg border text-left transition-all",
               isCorrect ? "bg-green-50/50 border-green-200" : "bg-red-50/50 border-red-200"
             )}>
               <div className="flex gap-3">
@@ -66,20 +66,20 @@ export function QuizResults({ questions, userAnswers, score, onReset }: QuizResu
                 )}>
                   {idx + 1}
                 </div>
-                <div className="space-y-2 w-full">
-                  <p className="font-medium text-foreground">{q.question}</p>
-                  <div className="text-sm space-y-1">
+                <div className="space-y-2 w-full min-w-0">
+                  <p className="font-medium text-foreground text-sm md:text-base break-words">{q.question}</p>
+                  <div className="text-xs md:text-sm space-y-1">
                     <p className={cn(
-                      "flex items-center gap-2",
+                      "flex items-center gap-2 break-words",
                       isCorrect ? "text-green-700" : "text-red-600 line-through"
                     )}>
-                      {isCorrect ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />}
-                      You: {q.options[userAnswer?.selected ?? 0]}
+                      {isCorrect ? <Check className="w-3 h-3 flex-shrink-0" /> : <X className="w-3 h-3 flex-shrink-0" />}
+                      <span>You: {q.options[userAnswer?.selected ?? 0]}</span>
                     </p>
                     {!isCorrect && (
-                      <p className="text-green-700 flex items-center gap-2">
-                        <Check className="w-3 h-3" />
-                        Correct: {q.options[q.correctAnswer]}
+                      <p className="text-green-700 flex items-center gap-2 break-words">
+                        <Check className="w-3 h-3 flex-shrink-0" />
+                        <span>Correct: {q.options[q.correctAnswer]}</span>
                       </p>
                     )}
                   </div>
@@ -90,8 +90,8 @@ export function QuizResults({ questions, userAnswers, score, onReset }: QuizResu
         })}
       </div>
 
-      <div className="flex justify-center pt-4">
-        <Button onClick={onReset} size="lg" className="gap-2">
+      <div className="flex justify-center pt-4 md:pt-6">
+        <Button onClick={onReset} size="lg" className="gap-2 w-full sm:w-auto touch-target">
           <RefreshCw className="w-4 h-4" />
           Create Another Quiz
         </Button>
@@ -171,10 +171,10 @@ export function QuizInterface({ questions, onReset }: QuizInterfaceProps) {
   }
 
   return (
-    <div className="w-full max-w-2xl mx-auto space-y-8">
+    <div className="w-full max-w-2xl mx-auto space-y-6 md:space-y-8">
       {/* Progress */}
       <div className="space-y-2">
-        <div className="flex justify-between text-sm text-muted-foreground">
+        <div className="flex justify-between text-xs sm:text-sm text-muted-foreground">
           <span>Question {currentIndex + 1} of {questions.length}</span>
           <span>{Math.round(((currentIndex) / questions.length) * 100)}% completed</span>
         </div>
@@ -187,9 +187,9 @@ export function QuizInterface({ questions, onReset }: QuizInterfaceProps) {
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -20 }}
-        className="space-y-6"
+        className="space-y-5 md:space-y-6"
       >
-        <h3 className="text-xl md:text-2xl font-display font-medium leading-tight">
+        <h3 className="text-lg sm:text-xl md:text-2xl font-display font-medium leading-tight">
           {currentQuestion.question}
         </h3>
 
@@ -206,7 +206,7 @@ export function QuizInterface({ questions, onReset }: QuizInterfaceProps) {
                 onClick={() => handleOptionClick(idx)}
                 disabled={isAnswered}
                 className={cn(
-                  "w-full p-4 rounded-xl border text-left transition-all duration-200",
+                  "w-full p-4 sm:p-5 rounded-xl border text-left transition-all duration-200 min-h-[56px] tap-highlight-none",
                   "hover:bg-secondary/50 focus:outline-none focus:ring-2 focus:ring-primary/20",
                   isSelected && !isAnswered && "border-primary ring-1 ring-primary bg-primary/5",
                   showCorrectness && "border-green-500 bg-green-50 text-green-900",
@@ -214,10 +214,10 @@ export function QuizInterface({ questions, onReset }: QuizInterfaceProps) {
                   !isSelected && isAnswered && isCorrect && "border-green-500 bg-green-50 text-green-900 opacity-70"
                 )}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">{option}</span>
-                  {showCorrectness && <Check className="w-5 h-5 text-green-600" />}
-                  {showIncorrectness && <X className="w-5 h-5 text-red-600" />}
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-medium text-sm sm:text-base break-words">{option}</span>
+                  {showCorrectness && <Check className="w-5 h-5 text-green-600 flex-shrink-0" />}
+                  {showIncorrectness && <X className="w-5 h-5 text-red-600 flex-shrink-0" />}
                 </div>
               </button>
             );
@@ -228,19 +228,19 @@ export function QuizInterface({ questions, onReset }: QuizInterfaceProps) {
       {/* Actions */}
       <div className="flex justify-end pt-4">
         {!isAnswered ? (
-          <Button 
-            onClick={handleSubmitAnswer} 
+          <Button
+            onClick={handleSubmitAnswer}
             disabled={selectedOption === null}
             size="lg"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto h-12 sm:h-auto touch-target"
           >
             Submit Answer
           </Button>
         ) : (
-          <Button 
-            onClick={handleNext} 
+          <Button
+            onClick={handleNext}
             size="lg"
-            className="w-full sm:w-auto gap-2"
+            className="w-full sm:w-auto gap-2 h-12 sm:h-auto touch-target"
           >
             {currentIndex < questions.length - 1 ? 'Next Question' : 'View Results'}
             <ArrowRight className="w-4 h-4" />

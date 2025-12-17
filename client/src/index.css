@@ -135,8 +135,81 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    /* Safe area insets for mobile devices */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* Touch-friendly minimum sizes */
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mobile-optimized container padding */
+  .container-mobile {
+    @apply px-4;
+  }
+  
+  @media (min-width: 640px) {
+    .container-mobile {
+      @apply px-6;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .container-mobile {
+      @apply px-8;
+    }
+  }
+  
+  /* Responsive text utilities */
+  .text-responsive-xs {
+    @apply text-xs;
+  }
+  
+  @media (min-width: 768px) {
+    .text-responsive-xs {
+      @apply text-sm;
+    }
+  }
+  
+  .text-responsive-sm {
+    @apply text-sm;
+  }
+  
+  @media (min-width: 768px) {
+    .text-responsive-sm {
+      @apply text-base;
+    }
+  }
+  
+  .text-responsive-base {
+    @apply text-base;
+  }
+  
+  @media (min-width: 768px) {
+    .text-responsive-base {
+      @apply text-lg;
+    }
+  }
+  
+  /* Touch-friendly tap highlight */
+  .tap-highlight-none {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent text selection on interactive elements */
+  .no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 }

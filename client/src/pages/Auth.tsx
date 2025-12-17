@@ -76,8 +76,8 @@ export default function AuthPage() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <header className="w-full border-b bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground">
+        <div className="container mx-auto px-4 h-14 sm:h-16 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground tap-highlight-none touch-target">
             <ArrowLeft className="w-4 h-4" />
             Back to Home
           </Link>
@@ -85,14 +85,14 @@ export default function AuthPage() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center px-4 py-10">
+      <main className="flex-1 flex items-center justify-center px-4 py-8 sm:py-10">
         <Card className="w-full max-w-md">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-xl">
+          <CardHeader className="space-y-2">
+            <CardTitle className="flex items-center gap-2 text-xl sm:text-2xl">
               <Sparkles className="w-5 h-5 text-primary" />
               {mode === "signin" ? "Sign in" : "Create an account"}
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="text-sm">
               {mode === "signin"
                 ? "Use your email and password or continue with Google."
                 : "Sign up with email and verify your address to save quiz results."}
@@ -100,17 +100,17 @@ export default function AuthPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             {user && !loading && !isVerified && (
-              <div className="flex items-start gap-2 rounded-md border border-yellow-300/60 bg-yellow-50/80 px-3 py-2 text-xs text-yellow-900">
-                <ShieldCheck className="w-4 h-4 mt-0.5" />
+              <div className="flex items-start gap-2 rounded-md border border-yellow-300/60 bg-yellow-50/80 px-3 py-3 text-xs text-yellow-900">
+                <ShieldCheck className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-medium">Email not verified</p>
-                  <p className="mt-0.5">
+                  <p className="mt-1">
                     We've sent a verification email to <span className="font-semibold">{user.email}</span>. After verifying, refresh the page.
                   </p>
                   <button
                     type="button"
                     onClick={handleResendVerification}
-                    className="mt-1 text-xs font-medium text-primary hover:underline"
+                    className="mt-2 text-xs font-medium text-primary hover:underline touch-target"
                   >
                     Resend verification email
                   </button>
@@ -118,32 +118,30 @@ export default function AuthPage() {
               </div>
             )}
 
-            <div className="flex items-center gap-1 rounded-full bg-secondary/60 p-1 text-xs font-medium">
+            <div className="flex items-center gap-1 rounded-full bg-secondary/60 p-1 text-sm font-medium">
               <button
                 type="button"
                 onClick={() => setMode("signin")}
-                className={`flex-1 px-3 py-1 rounded-full text-center ${
-                  mode === "signin" ? "bg-background shadow-sm" : "text-muted-foreground"
-                }`}
+                className={`flex-1 px-4 py-2 rounded-full text-center transition-colors tap-highlight-none ${mode === "signin" ? "bg-background shadow-sm" : "text-muted-foreground"
+                  }`}
               >
                 Sign in
               </button>
               <button
                 type="button"
                 onClick={() => setMode("signup")}
-                className={`flex-1 px-3 py-1 rounded-full text-center ${
-                  mode === "signup" ? "bg-background shadow-sm" : "text-muted-foreground"
-                }`}
+                className={`flex-1 px-4 py-2 rounded-full text-center transition-colors tap-highlight-none ${mode === "signup" ? "bg-background shadow-sm" : "text-muted-foreground"
+                  }`}
               >
                 Sign up
               </button>
             </div>
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-5" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="text-sm font-medium">Email</Label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-3 flex items-center text-muted-foreground">
+                  <span className="absolute inset-y-0 left-3 flex items-center text-muted-foreground pointer-events-none">
                     <Mail className="w-4 h-4" />
                   </span>
                   <Input
@@ -152,16 +150,16 @@ export default function AuthPage() {
                     autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="pl-9"
+                    className="pl-10 h-12 text-base"
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="text-sm font-medium">Password</Label>
                 <div className="relative">
-                  <span className="absolute inset-y-0 left-3 flex items-center text-muted-foreground">
+                  <span className="absolute inset-y-0 left-3 flex items-center text-muted-foreground pointer-events-none">
                     <Lock className="w-4 h-4" />
                   </span>
                   <Input
@@ -170,19 +168,19 @@ export default function AuthPage() {
                     autoComplete={mode === "signin" ? "current-password" : "new-password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-9"
+                    className="pl-10 h-12 text-base"
                     required
                   />
                 </div>
               </div>
 
               {error && (
-                <p className="text-xs text-destructive">{error}</p>
+                <p className="text-xs sm:text-sm text-destructive">{error}</p>
               )}
 
               <Button
                 type="submit"
-                className="w-full mt-1"
+                className="w-full h-12 text-base touch-target"
                 disabled={submitting || !email || !password}
               >
                 {submitting ? "Please wait..." : mode === "signin" ? "Sign in" : "Create account"}
@@ -198,7 +196,7 @@ export default function AuthPage() {
             <Button
               type="button"
               variant="outline"
-              className="w-full gap-2"
+              className="w-full gap-2 h-12 text-base touch-target"
               onClick={handleGoogle}
               disabled={submitting}
             >
