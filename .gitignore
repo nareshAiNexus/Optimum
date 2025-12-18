@@ -7,7 +7,9 @@ node_modules
 .gitignore
 /.gitignore
 WARP.md 
-
+env
+.env
+/.env
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
