@@ -4,7 +4,6 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { BrainCircuit, ChevronRight, Github, Mail, Info, Menu, Sparkles, Zap } from "lucide-react";
 import { QuestionGenerator } from "@/components/QuestionGenerator";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import heroImage from "@/assets/generated_images/minimalist_abstract_education_ai_concept_with_floating_geometric_shapes_and_soft_gradients.png";
 import { useAuth } from "@/contexts/AuthContext";
@@ -58,10 +57,9 @@ export default function Home() {
                   <Link href="/auth">Sign in / Sign up</Link>
                 </Button>
               )}
-              <ThemeToggle />
               <Button variant="ghost" size="icon" asChild className="hover:bg-secondary/50">
-                <a 
-                  href="https://github.com/replit/optimum" 
+                <a
+                  href="https://github.com/replit/optimum"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
@@ -74,7 +72,6 @@ export default function Home() {
 
           {/* Mobile Nav */}
           <div className="md:hidden flex items-center gap-2">
-            <ThemeToggle />
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="touch-target">
