@@ -60,8 +60,8 @@ export default function Home() {
               )}
               <ThemeToggle />
               <Button variant="ghost" size="icon" asChild className="hover:bg-secondary/50">
-                <a
-                  href="https://github.com/replit/optimum"
+                <a 
+                  href="https://github.com/replit/optimum" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors"
@@ -258,17 +258,17 @@ export default function Home() {
                     Have questions, suggestions, or just want to say hi? We'd love to hear from you.
                   </p>
                   <div className="flex flex-col gap-4 items-center">
-                    <Button size="lg" className="gap-2 rounded-full px-6 sm:px-8 hover:scale-105 transition-transform touch-target" asChild>
-                      <a href="mailto:optimum-five@gmail.com">
+                    <Button size="lg" className="gap-2 rounded-full px-8 hover:scale-105 transition-transform" asChild>
+                      <a href="mailto:hello@optimum.ai">
                         <Mail className="w-4 h-4" />
                         optimum-five@gmail.com
                       </a>
                     </Button>
                     <div className="flex gap-4">
-                      <Button variant="ghost" size="icon" asChild className="hover:bg-background touch-target">
+                      <Button variant="ghost" size="icon" asChild className="hover:bg-background">
                         <a href="#" className="hover:text-primary transition-colors"><Github className="w-5 h-5" /></a>
                       </Button>
-                      <Button variant="ghost" size="icon" asChild className="hover:bg-background touch-target">
+                      <Button variant="ghost" size="icon" asChild className="hover:bg-background">
                         <a href="#" className="hover:text-primary transition-colors"><span className="font-bold text-lg">𝕏</span></a>
                       </Button>
                     </div>
