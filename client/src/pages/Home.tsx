@@ -32,9 +32,7 @@ export default function Home() {
             setHasStarted(false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}>
-            <div className="w-7 h-7 sm:w-8 sm:h-8 bg-primary rounded-lg flex items-center justify-center transition-transform group-hover:scale-105">
-              <BrainCircuit className="w-4 h-4 sm:w-5 sm:h-5 text-primary-foreground" />
-            </div>
+            <img src="/logo.svg" alt="OPTIMUM Logo" className="w-7 h-7 sm:w-8 sm:h-8 transition-transform group-hover:scale-105" />
             <span className="font-display font-bold text-lg sm:text-xl tracking-tight group-hover:text-primary transition-colors">OPTIMUM</span>
           </div>
 
